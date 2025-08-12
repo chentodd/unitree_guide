@@ -22,18 +22,14 @@ RUN groupadd --gid $USER_GID $USERNAME \
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
-    # ros-${ROS_DISTRO}-vision-msgs \
-    # ros-${ROS_DISTRO}-ros2-control \
-    # ros-${ROS_DISTRO}-ros2-controllers \
-    # ros-${ROS_DISTRO}-xacro \
-    # ros-${ROS_DISTRO}-webots-ros2 \
-    # ros-${ROS_DISTRO}-ros-gz \
+    ros-${ROS_DISTRO}-navigation \
     gdb \
     curl \
     git \ 
     libclang-dev \
     tmux \ 
-    python3-pip
+    python3-pip \
+    liblcm-dev
 
 # ********************************************************
 # * Anything else you want to do like clean up goes here *
