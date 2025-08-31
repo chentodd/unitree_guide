@@ -17,8 +17,7 @@
                 "ms-vscode.cpptools-themes",
                 "twxs.cmake",
                 "donjayamanne.python-extension-pack",
-                "eamodio.gitlens",
-                "ms-iot.vscode-ros"
+                "eamodio.gitlens"
             ]
         }
     },
@@ -30,11 +29,11 @@
         "--net=host",
         "--pid=host",
         "--ipc=host",
+        "--gpus", "all",
         "-e", "DISPLAY=${env:DISPLAY}"
     ],
     "mounts": [
        "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind,consistency=cached",
-       "source=/dev/dri,target=/dev/dri,type=bind,consistency=cached",
        "type=bind,source=/dev/bus/usb,target=/dev/bus/usb",
        "type=bind,source=/etc/udev/rules.d,target=/etc/udev/rules.d"
     ],
