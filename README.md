@@ -42,3 +42,83 @@ After starting the controller,  the robot will lie on the ground of the simulato
 
 # Note
 Unitree_guide provides a basic quadruped robot controller for beginners. To achive better performance, additional fine tuning of parameters or more advanced methods (such as MPC etc.) might be required. Any contribution and good idea from the robotics community are all welcome. Feel free to raise an issue ~ <br>
+
+---
+
+# Addition information
+
+## Environment setup
+
+The simulator(gazebo) is run with nvidia GPU, so please make sure GPU is correctly configured if you use docker settings directly. Below are the steps to configure GPU:
+
+### Install CUDA
+
+Follow the steps in the [link](https://developer.nvidia.com/cuda-downloads) to install CUDA, the drivers
+will be installed when you install CUDA.
+
+After CUDA is installed, run following commands to check installation:
+
+```bash
+$ nvidia-smi
+
+# Test output
+Sun Aug 31 13:05:48 2025       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 580.65.06              Driver Version: 580.65.06      CUDA Version: 13.0     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA GeForce RTX 4050 ...    On  |   00000000:01:00.0  On |                  N/A |
+| N/A   46C    P8              2W /   80W |     366MiB /   6141MiB |      4%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|    0   N/A  N/A           27268      G   /usr/lib/xorg/Xorg                      136MiB |
+|    0   N/A  N/A           27541      G   /usr/bin/gnome-shell                     32MiB |
+|    0   N/A  N/A           28162      G   ...exec/xdg-desktop-portal-gnome          2MiB |
+|    0   N/A  N/A           37088      G   ...ersion=20250829-130006.660000         43MiB |
+|    0   N/A  N/A           78545      G   /usr/share/code/code                     95MiB |
++-----------------------------------------------------------------------------------------+
+```
+
+```bash
+nvcc --version
+
+nvcc: NVIDIA (R) Cuda compiler driver
+Copyright (c) 2005-2025 NVIDIA Corporation
+Built on Wed_Jan_15_19:20:09_PST_2025
+Cuda compilation tools, release 12.8, V12.8.61
+Build cuda_12.8.r12.8/compiler.35404655_0
+```
+
+### Install Nvidia container toolkit
+
+Follow the steps in the [link](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html) to install container toolkit.
+
+After toolkit is installed, open repository with vs code, rebuild the container and run following commands to test installation:
+
+```bash
+$ nvidia-smi
+
+# It should generate similar result as above step
+```
+
+```bash
+$ glxinfo -B
+
+# The vendor should be "Nvidia ..."
+```
+
+If you find out Nvidia GPU is not needed, then disable these lines in Docker file and rebuild container.
+
+```
+ENV NVIDIA_VISIBLE_DEVICES=all
+ENV NVIDIA_DRIVER_CAPABILITIES=all
+```
